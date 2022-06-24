@@ -1,14 +1,13 @@
 using Script.Services.Input;
 using UnityEngine;
 
-
 namespace Script.Infrastructure
 {
     public class BootstrapState : IState
     {
+        private const string Initial = "Initial";
         private readonly GameStateMachine _stateMachine;
-        private SceneLoader _sceneLoader;
-        private string Initial;
+        private readonly SceneLoader _sceneLoader;
 
         public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
         {
@@ -18,28 +17,25 @@ namespace Script.Infrastructure
         public void Enter()
         {
             RegisterServices();
-            Initial = "Initial";
-            _sceneLoader.Load(Initial,EnterLoadLevel);
+            _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
+           // _sceneLoader.Load("Main");
         }
 
-        private void EnterLoadLevel() => _stateMachine.Enter<LoadLevelState, string>("simple_scene2");
+        public void Exit()
+        {
+        }
 
+        private void EnterLoadLevel() => _stateMachine.Enter<LoadLevelState, string>("Scenes/Main");
         private void RegisterServices()
         {
             Game.InputServices = RegisterInputServices();
         }
-
         private static IInputServices RegisterInputServices()
         {
             if (Application.isEditor)
                 return new StandaloneInputService(/*VirtualInputsPlugin.Instance*/);
             else
-                return new MobileInputService();
-        }
-
-        public void Exit( _curtain)
-        {
-            throw new System.NotImplementedException();
+                return new MobileInputService(/*VirtualInputsPlugin.Instance*/);
         }
     }
 }

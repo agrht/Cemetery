@@ -1,38 +1,39 @@
 using Script.Logic;
 using UnityEngine;
-using static Script.Logic.LodingCurtain;
 
 namespace Script.Infrastructure
 {
-    public class LoadLevelState: IPayloadedIState<string>, IExitableState
+    public class LoadLevelState: IState, IPayLoadedIState<string>, IExcitableState
     {
+        private const string InitialPointTag = "InitialPoint";
+        private const string HeroPath = "Hero/hero";
+        private const string HudPath = "Graphics/Hud";
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
+        private readonly LoadingCurtain _curtain;
 
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, LodingCurtain curtain)
+        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
+            _curtain = curtain;
         }
-
         public void Enter(string sceneName)
         { 
-            LodingCurtain _curtain = null;//????
             _curtain.Show();
-            _sceneLoader.Load(sceneName, () => OnLoaded("InitialPoint", "Assets/Resources/Hero/hero.prefab", "Assets/Graphics/Hud.prefab"));
+            _sceneLoader.Load(sceneName, OnLoaded);
         }
 
         public void Exit() => _curtain.Hide();
 
         public void Enter()
         {
-            throw new System.NotImplementedException();
         }
 
-        private void OnLoaded(string InitialpointTag, string HeroPath, string HudPath)
+        private void OnLoaded( )
         {
-            GameObject InitialPoint = GameObject.FindWithTag(InitialpointTag);
-            GameObject hero = Instantiate(HeroPath,InitialPoint.transform.position);
+            GameObject initialPoint = GameObject.FindWithTag(InitialPointTag);
+            GameObject hero = Instantiate(LoadLevelState.HeroPath,at: initialPoint.transform.position);
             Instantiate(HudPath);
             
             CameraFollow(hero);
@@ -53,9 +54,15 @@ namespace Script.Infrastructure
         }
         private void CameraFollow(GameObject hero)
         {
-            Camera.main
-                .GetComponent<CameraFollow.CameraFollow>()
-                .Follow(hero);
+            if (Camera.main != null)
+                Camera.main
+                    .GetComponent<CameraFollow.CameraFollow>()
+                    .Follow(hero);
+        }
+
+        public void Enter<TPayLoad>()
+        {
+            
         }
     }
 }

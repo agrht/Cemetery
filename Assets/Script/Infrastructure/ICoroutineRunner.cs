@@ -5,7 +5,6 @@ namespace Script.Infrastructure
 {
     public interface ICoroutineRunner
     {
-
-        Coroutine startCoroutine(IEnumerator coroutine);
+        Coroutine StartCoroutine(IEnumerator coroutine);
     }
 }

@@ -8,13 +8,12 @@ namespace Script.Infrastructure
     public class SceneLoader
     {
         private readonly ICoroutineRunner _coroutineRunner;
-        
         public SceneLoader(ICoroutineRunner coroutineRunner) => 
             _coroutineRunner = coroutineRunner;
 
         public void Load(string name, Action onLoaded = null) =>
-            _coroutineRunner.startCoroutine(LoadScene(name, onLoaded));
-        public IEnumerator LoadScene(string nextScene, Action onLoaded = null)
+            _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded));
+        private IEnumerator LoadScene(string nextScene, Action onLoaded = null)
         {
             if (SceneManager.GetActiveScene().name == nextScene)
             {
@@ -25,10 +24,6 @@ namespace Script.Infrastructure
             while (!waitNextScene.isDone)
                 yield return null;
             onLoaded?.Invoke();
-        }
-
-        public void Load()
-        {
         }
     }
 }
