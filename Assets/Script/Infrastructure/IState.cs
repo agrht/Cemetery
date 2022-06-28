@@ -4,4 +4,13 @@ namespace Script.Infrastructure
     {
         void Enter();
     }
+    public interface IPayLoadedIState<TPayLoad>:IExcitableState
+    {
+        void Enter(TPayLoad payLoad);
+    }
+    public interface IExcitableState
+    {
+        void Exit();
+    }
+    
 }

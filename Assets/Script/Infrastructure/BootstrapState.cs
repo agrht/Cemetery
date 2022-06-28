@@ -12,6 +12,7 @@ namespace Script.Infrastructure
         public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
         {
             _stateMachine = stateMachine;
+            _sceneLoader = sceneLoader;
         }
 
         public void Enter()
@@ -25,7 +26,8 @@ namespace Script.Infrastructure
         {
         }
 
-        private void EnterLoadLevel() => _stateMachine.Enter<LoadLevelState, string>("Scenes/Main");
+        private void EnterLoadLevel() => 
+            _stateMachine.Enter<LoadLevelState, string>("Scenes/Main");
         private void RegisterServices()
         {
             Game.InputServices = RegisterInputServices();

@@ -17,14 +17,8 @@ namespace Script.Logic
             gameObject.SetActive(true);
             Curtain.alpha = 1;
         }
-
         public void Hide() =>
-            StatrCoroutine(FadeIn());
-
-        private void StatrCoroutine(IEnumerator fadeIn)
-        {
-            throw new System.NotImplementedException();
-        }
+            StartCoroutine(FadeIn());
 
         private IEnumerator FadeIn()
         {

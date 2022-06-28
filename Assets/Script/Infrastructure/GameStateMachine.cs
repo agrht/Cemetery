@@ -23,10 +23,10 @@ namespace Script.Infrastructure
             IState state = ChangeState<TState>();
             state.Enter();
         }
-        public void Enter<TState, TPayLoad>(TPayLoad payLoad) where TState : class,IPayLoadedIState<TPayLoad>, IExcitableState 
+        public void Enter<TState, TPayLoad>(TPayLoad payLoad) where TState : class,IPayLoadedIState<TPayLoad>, IExcitableState
         {
             TState state = ChangeState<TState>();
-            state.Enter<TPayLoad>();
+            state.Enter(payLoad);
         }
         private TState GetState<TState>() where TState : class, IExcitableState => 
             _states[typeof(TState)] as TState;

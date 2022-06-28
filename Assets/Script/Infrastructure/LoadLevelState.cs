@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Script.Infrastructure
 {
-    public class LoadLevelState: IState, IPayLoadedIState<string>, IExcitableState
+    public class LoadLevelState: IPayLoadedIState<string>
     {
         private const string InitialPointTag = "InitialPoint";
-        private const string HeroPath = "Hero/hero";
-        private const string HudPath = "Graphics/Hud";
+        private const string HeroPath = "Hero/Hero";
+        private const string HudPath = "Hud/Hud";
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _curtain;
@@ -24,16 +24,13 @@ namespace Script.Infrastructure
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
-        public void Exit() => _curtain.Hide();
+        public void Exit() =>
+            _curtain.Hide();
 
-        public void Enter()
-        {
-        }
-
-        private void OnLoaded( )
+        private void OnLoaded()
         {
             GameObject initialPoint = GameObject.FindWithTag(InitialPointTag);
-            GameObject hero = Instantiate(LoadLevelState.HeroPath,at: initialPoint.transform.position);
+            GameObject hero = Instantiate(HeroPath,at: initialPoint.transform.position);
             Instantiate(HudPath);
             
             CameraFollow(hero);
@@ -52,17 +49,11 @@ namespace Script.Infrastructure
             var prefab = Resources.Load<GameObject>(path);
             return  Object.Instantiate(prefab,at,Quaternion.identity);
         }
-        private void CameraFollow(GameObject hero)
+        private static void CameraFollow(GameObject hero)
         {
-            if (Camera.main != null)
-                Camera.main
+            Camera.main
                     .GetComponent<CameraFollow.CameraFollow>()
                     .Follow(hero);
-        }
-
-        public void Enter<TPayLoad>()
-        {
-            
         }
     }
 }

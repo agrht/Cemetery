@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &295606512 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 828969873507552651, guid: 37ca80909c4fac34c95a600ad79e2724, type: 3}
+  m_PrefabInstance: {fileID: 1128434444}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa2a538892c44f2a9f190a2d3248604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &543130258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181,7 +192,7 @@ PrefabInstance:
     - target: {fileID: 6188265281922572253, guid: b046d4b011ff38449b2645bbd6a046fe, type: 3}
       propertyPath: Curtain
       value: 
-      objectReference: {fileID: 828969873507552651, guid: 37ca80909c4fac34c95a600ad79e2724, type: 3}
+      objectReference: {fileID: 295606512}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b046d4b011ff38449b2645bbd6a046fe, type: 3}
 --- !u!1001 &1128434444
@@ -191,6 +202,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 717206243052098699, guid: 37ca80909c4fac34c95a600ad79e2724, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3e43d2291dbe1124e8a6d716972c2162, type: 3}
     - target: {fileID: 8173028522407009200, guid: 37ca80909c4fac34c95a600ad79e2724, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -274,6 +289,10 @@ PrefabInstance:
     - target: {fileID: 8173028522407009200, guid: 37ca80909c4fac34c95a600ad79e2724, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8173028522407009203, guid: 37ca80909c4fac34c95a600ad79e2724, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8173028522407009207, guid: 37ca80909c4fac34c95a600ad79e2724, type: 3}
       propertyPath: m_Name
